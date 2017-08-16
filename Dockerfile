@@ -23,12 +23,12 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
 
 # Copy application
-COPY ../reflectcal/build/app /usr/share/
-COPY ../reflectcal/build/app.js /usr/share/app
-COPY ../reflectcal/build/package.json /usr/share/app
+COPY ./src/app /usr/share/
+COPY ./src/app.js /usr/share/
+COPY ./src/package.json /usr/share/
 
 # Install node modules
-RUN npm install
+RUN /usr/share/npm install
 
 # Init
 RUN mkdir -p /etc/my_init.d
