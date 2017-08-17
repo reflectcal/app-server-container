@@ -23,12 +23,19 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
 
 # Copy application
-COPY ./src/app /usr/share/
-COPY ./src/app.js /usr/share/
-COPY ./src/package.json /usr/share/
+COPY ./src/app /usr/share/app-server/app/
+COPY ./src/logs /usr/share/app-server/logs/
+COPY ./src/app.js /usr/share/app-server/
+COPY ./src/package.json /usr/share/app-server/
+COPY ./src/client_secret_* /usr/share/app-server/
 
 # Install node modules
-RUN cd /usr/share/ && npm install
+# We may need this to build native modules
+#RUN apt-get update; exit 0
+#RUN apt-get install -y python-minimal build-essential
+RUN cd /usr/share/app-server && npm install
 
 # Init
 RUN mkdir -p /etc/my_init.d
+COPY 01-run.sh /etc/my_init.d/01-run.sh
+RUN chmod +x /etc/my_init.d/01-run.sh
