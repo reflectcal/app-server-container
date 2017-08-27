@@ -27,7 +27,6 @@ COPY ./src/app /usr/share/app-server/app/
 COPY ./src/logs /usr/share/app-server/logs/
 COPY ./src/app.js /usr/share/app-server/
 COPY ./src/package.json /usr/share/app-server/
-COPY ./src/client_secret_* /usr/share/app-server/
 
 # Install node modules
 # We may need this to build native modules
